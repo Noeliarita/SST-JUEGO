@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Yo Soy el Protagonista — Ambipar</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --blue:#1a6fff;
+  --blue2:#0047cc;
+  --cyan:#0ea5e9;
+  --red:#e8233a;
+  --green:#059669;
+  --amber:#d97706;
+  --bg:#f0f4ff;
+  --white:#ffffff;
+  --card:#ffffff;
+  --text:#0f172a;
+  --text2:#475569;
+  --text3:#94a3b8;
+  --border:#e2e8f0;
+  --border-blue:#bfdbfe;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{font-size:16px;}
+body{
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  font-family:'Barlow',sans-serif;
+  color:var(--text);
+  padding-bottom:env(safe-area-inset-bottom);
+}
+#root{
+  width:100%;
+  max-width:480px;
+  padding:0 0 40px;
+}
+
+/* ── SCREENS ── */
+.screen{display:none;}
+.screen.on{display:block;animation:fdi .3s ease;}
+@keyframes fdi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HEADER HERO ── */
+.hero{
+  background:linear-gradient(160deg,#0047cc 0%,#1a6fff 55%,#0ea5e9 100%);
+  padding:32px 20px 28px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:#ffffff12;border-radius:50%;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;
+  width:140px;height:140px;
+  background:#ffffff08;border-radius:50%;
+}
+.hero-brand{font-size:10px;letter-spacing:4px;color:#ffffffaa;text-transform:uppercase;margin-bottom:10px;font-family:'Barlow Condensed',sans-serif;}
+.hero-tag{font-size:11px;letter-spacing:3px;color:#ffffffcc;text-transform:uppercase;font-family:'Barlow Condensed',sans-serif;font-weight:700;margin-bottom:4px;}
+.hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(28px,7vw,38px);font-weight:900;color:#fff;line-height:1.05;text-shadow:0 2px 12px #00000030;}
+.hero-title em{color:#7dd3fc;font-style:normal;}
+.hero-pill{display:inline-block;background:#ffffff20;border:1px solid #ffffff40;border-radius:20px;font-size:10px;color:#ffffffcc;padding:5px 14px;margin-top:12px;font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;}
+
+/* ── CONTENT AREA ── */
+.content{padding:16px 16px 0;}
+
+/* ── CARD ── */
+.card{background:var(--card);border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 1px 8px #0047cc12,0 0 0 1px var(--border);}
+
+/* ── INPUT ── */
+.inp{
+  width:100%;
+  background:#f8faff;
+  border:1.5px solid var(--border-blue);
+  border-radius:12px;
+  padding:14px 16px;
+  color:var(--text);
+  font-size:16px; /* 16px prevents iOS zoom */
+  font-family:'Barlow',sans-serif;
+  outline:none;
+  margin-bottom:12px;
+  -webkit-appearance:none;
+}
+.inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1a6fff18;}
+.inp::placeholder{color:var(--text3);}
+
+/* ── BUTTONS ── */
+.btn{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:700;
+  font-family:'Barlow Condensed',sans-serif;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  border:none;
+  touch-action:manipulation;
+  transition:transform .1s,box-shadow .15s;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 4px 18px #1a6fff35;}
+.btn-primary:active{box-shadow:0 2px 8px #1a6fff25;}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--blue));color:#fff;box-shadow:0 3px 14px #0ea5e930;}
+.btn-ghost{background:transparent;border:1.5px solid var(--border-blue);color:var(--blue);font-size:13px;padding:12px;}
+.btn-sm{width:auto;padding:10px 18px;font-size:12px;}
+
+/* ── BADGE ── */
+.badge{
+  display:inline-block;
+  font-size:10px;font-weight:700;
+  font-family:'Barlow Condensed',sans-serif;
+  letter-spacing:2px;text-transform:uppercase;
+  padding:5px 12px;border-radius:20px;margin-bottom:12px;
+}
+.b0{background:#dbeafe;color:#1d4ed8;}
+.b1{background:#e0f2fe;color:#0369a1;}
+.b2{background:#fee2e2;color:#b91c1c;}
+.b3{background:#d1fae5;color:#065f46;}
+.b4{background:#fef3c7;color:#92400e;}
+.b5{background:#ede9fe;color:#5b21b6;}
+.b6{background:#fce7f3;color:#9d174d;}
+.b7{background:#d1fae5;color:#065f46;}
+.b8{background:#dbeafe;color:#1d4ed8;}
+.b9{background:#fee2e2;color:#b91c1c;}
+
+/* ── TIMER ── */
+.timer-block{background:var(--card);border-radius:12px;padding:10px 16px;margin-bottom:10px;box-shadow:0 1px 4px #0047cc0a,0 0 0 1px var(--border);display:flex;align-items:center;gap:12px;}
+.timer-track{flex:1;height:8px;background:#f1f5f9;border-radius:4px;overflow:hidden;}
+.timer-fill{height:8px;border-radius:4px;transition:width 1s linear,background .5s;}
+.timer-count{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:800;min-width:38px;text-align:right;transition:color .5s;}
+.timer-icon{font-size:16px;}
+
+/* ── PROGRESS ── */
+.prog-block{padding:0 16px;margin-bottom:10px;}
+.prog-top{display:flex;justify-content:space-between;margin-bottom:5px;}
+.prog-top span{font-size:11px;color:var(--text3);font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;}
+.prog-track{height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden;}
+.prog-fill{height:5px;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:3px;transition:width .5s ease;}
+
+/* ── DOTS ── */
+.dots-row{display:flex;gap:8px;align-items:center;}
+.dot{width:13px;height:13px;border-radius:50%;transition:all .3s;}
+.dot.live{background:var(--blue);box-shadow:0 0 0 3px #1a6fff30;}
+.dot.dead{background:var(--red);box-shadow:0 0 0 3px #e8233a25;}
+
+/* ── OPTIONS ── */
+.opt{
+  width:100%;text-align:left;
+  background:#f8faff;
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:14px 16px;
+  margin-bottom:10px;
+  color:var(--text2);
+  font-size:14px;
+  font-family:'Barlow',sans-serif;
+  cursor:pointer;
+  line-height:1.5;
+  display:flex;gap:12px;align-items:flex-start;
+  touch-action:manipulation;
+  transition:border-color .15s,background .15s;
+  -webkit-appearance:none;
+  min-height:54px;
+}
+.opt:active{background:#eff6ff;border-color:var(--blue);}
+.opt-letter{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:800;font-size:16px;
+  color:var(--blue);min-width:20px;margin-top:1px;
+}
+.opt-text{flex:1;line-height:1.5;}
+.opt.ok{border-color:var(--green);background:#ecfdf5;pointer-events:none;}
+.opt.ok .opt-letter,.opt.ok .opt-text{color:#065f46;}
+.opt.no{border-color:var(--red);background:#fff1f2;pointer-events:none;}
+.opt.no .opt-letter,.opt.no .opt-text{color:#b91c1c;}
+.opt.dim{opacity:.28;pointer-events:none;}
+
+/* ── FEEDBACK ── */
+.fb{border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.65;margin:8px 0 2px;}
+.fb-ok{background:#ecfdf5;border:1.5px solid #a7f3d0;color:#065f46;}
+.fb-no{background:#fff1f2;border:1.5px solid #fca5a5;color:#b91c1c;}
+.fb-time{background:#fffbeb;border:1.5px solid #fcd34d;color:#92400e;}
+
+/* ── SCORE HERO ── */
+.score-big{font-family:'Barlow Condensed',sans-serif;font-size:80px;font-weight:900;color:var(--blue);line-height:1;text-align:center;}
+.score-big span{font-size:36px;color:var(--text3);}
+.score-sub{font-size:11px;letter-spacing:3px;color:var(--text3);text-transform:uppercase;text-align:center;margin-top:4px;}
+
+/* ── STATS GRID ── */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 8px;text-align:center;}
+.stat-val{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:var(--blue);}
+.stat-lbl{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+
+/* ── RANKING ── */
+.rank-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #f1f5f9;}
+.rank-row:last-child{border-bottom:none;}
+.rank-pos{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;min-width:34px;}
+.rk1{color:var(--amber);}
+.rk2{color:#64748b;}
+.rk3{color:#c2410c;}
+.rkn{color:var(--text3);}
+.rank-name{font-size:14px;font-weight:600;color:var(--text);}
+.rank-meta{font-size:11px;color:var(--text3);margin-top:2px;}
+.rank-score{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;}
+
+/* ── TOP BAR (game) ── */
+.topbar{
+  background:linear-gradient(135deg,#0047cc,#1a6fff);
+  padding:14px 16px 12px;
+  display:flex;justify-content:space-between;align-items:center;
+  position:sticky;top:0;z-index:10;
+}
+.topbar-title{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#fff;letter-spacing:1px;}
+.topbar-sub{font-size:10px;color:#ffffffaa;letter-spacing:2px;text-transform:uppercase;}
+
+/* ── ANIMATIONS ── */
+.bounce{animation:bnc .3s ease;}
+@keyframes bnc{0%{transform:scale(1)}45%{transform:scale(1.03)}100%{transform:scale(1)}}
+.shake{animation:shk .3s ease;}
+@keyframes shk{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
+
+hr{border:none;border-top:1px solid #f1f5f9;margin:12px 0;}
+.gap{height:10px;}
+</style>
+</head>
+<body>
+<div id="root">
+
+<!-- ══════════ WELCOME ══════════ -->
+<div id="sw" class="screen on">
+  <div class="hero">
+    <div class="hero-brand">ambipar · vivimos la seguridad</div>
+    <div class="hero-tag">Campaña de Seguridad</div>
+    <div class="hero-title">"YO SOY EL<br><em>PROTAGONISTA"</em></div>
+    <div class="hero-pill">10 preguntas · 30 seg c/u · 2 intentos</div>
+  </div>
+  <div class="content">
+    <div class="gap"></div>
+    <div class="card">
+      <div style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.7;">
+        👋 Bienvenido. Responde <strong style="color:var(--blue);">10 casos reales</strong> de los estándares Ambipar.<br>
+        Tienes <strong style="color:var(--red);">2 intentos</strong> y <strong style="color:var(--amber);">30 segundos</strong> por pregunta.
+      </div>
+      <label style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px;display:block;letter-spacing:.5px;">TU NOMBRE COMPLETO</label>
+      <input class="inp" id="inp-name" placeholder="Escribe tu nombre..." autocomplete="name" onkeydown="if(event.key==='Enter')doStart()"/>
+      <button class="btn btn-primary" onclick="doStart()">⚡ INICIAR JUEGO</button>
+      <div id="err-name" style="font-size:12px;color:var(--red);margin-top:8px;display:none;">Por favor ingresa tu nombre.</div>
+    </div>
+    <button class="btn btn-ghost" onclick="goPin()">🔐 Panel administrador</button>
+    <div style="text-align:center;margin-top:16px;font-size:10px;color:var(--text3);letter-spacing:2px;">AMBIPAR CHECKPOINT · AMBIPAR GSA</div>
+  </div>
+</div>
+
+<!-- ══════════ BLOCKED ══════════ -->
+<div id="sbl" class="screen">
+  <div class="hero" style="padding-bottom:40px;">
+    <div class="hero-brand">ambipar · vivimos la seguridad</div>
+    <div class="hero-title">🔒<br><em>BLOQUEADO</em></div>
+  </div>
+  <div class="content">
+    <div class="gap"></div>
+    <div class="card" style="text-align:center;padding:28px 20px;">
+      <div style="font-size:13px;color:var(--text2);line-height:1.8;" id="bl-msg"></div>
+      <div style="margin-top:14px;font-size:12px;color:var(--text3);">Tu último resultado está registrado.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ GAME ══════════ -->
+<div id="sg" class="screen">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">"YO SOY EL PROTAGONISTA"</div>
+      <div class="topbar-sub" id="q-counter">CASO 1 / 10</div>
+    </div>
+    <div>
+      <div class="dots-row" style="justify-content:flex-end;">
+        <div class="dot live" id="d1"></div>
+        <div class="dot live" id="d2"></div>
+      </div>
+      <div style="font-size:9px;color:#ffffffaa;text-align:right;margin-top:3px;letter-spacing:1px;">INTENTOS</div>
+    </div>
+  </div>
+
+  <div class="prog-block" style="padding-top:12px;">
+    <div class="prog-top">
+      <span id="prog-label">PROGRESO</span>
+      <span id="score-label">PUNTAJE: 0/10</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="timer-block" style="margin:0 16px 10px;">
+    <span class="timer-icon">⏱</span>
+    <div class="timer-track"><div class="timer-fill" id="t-bar" style="width:100%;background:var(--blue);"></div></div>
+    <div class="timer-count" id="t-num" style="color:var(--blue);">30</div>
+  </div>
+
+  <div class="content" style="padding-top:0;">
+    <div class="card" id="q-card">
+      <span class="badge b0" id="q-cat"></span>
+      <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.4;" id="q-title"></div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px;" id="q-sit"></div>
+      <div style="font-size:10px;font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:10px;">¿Cuál es la respuesta correcta?</div>
+      <div id="opts"></div>
+      <div id="q-fb" class="fb" style="display:none;"></div>
+      <div class="gap"></div>
+      <button class="btn btn-cyan" id="next-btn" style="display:none;" onclick="doNext()">SIGUIENTE →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FINISH ══════════ -->
+<div id="sf" class="screen">
+  <div class="hero">
+    <div class="hero-brand">ambipar · vivimos la seguridad</div>
+    <div class="hero-tag">Campaña de Seguridad</div>
+    <div class="hero-title">"YO SOY EL<br><em>PROTAGONISTA"</em></div>
+  </div>
+  <div class="content">
+    <div class="gap"></div>
+    <div class="card" style="text-align:center;padding:28px 20px;">
+      <div class="score-big" id="fin-score">0<span>/10</span></div>
+      <div class="score-sub">puntos correctos</div>
+      <div style="margin:14px 0 4px;font-size:15px;font-weight:600;color:var(--text);" id="fin-name"></div>
+      <div style="font-size:13px;line-height:1.65;" id="fin-msg"></div>
+      <hr/>
+      <div id="fin-status" style="font-size:12px;color:var(--text3);padding:4px 0;"></div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--text3);margin-bottom:12px;">El administrador anunciará al ganador 🏆</div>
+    <button class="btn btn-ghost" onclick="goWelcome()">Jugar otro turno</button>
+  </div>
+</div>
+
+<!-- ══════════ PIN ══════════ -->
+<div id="spin" class="screen">
+  <div class="hero">
+    <div class="hero-brand">ambipar · administrador</div>
+    <div class="hero-title">🔐<br><em>ADMIN</em></div>
+  </div>
+  <div class="content">
+    <div class="gap"></div>
+    <div class="card">
+      <label style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px;display:block;letter-spacing:.5px;">CLAVE DE ADMINISTRADOR</label>
+      <input class="inp" type="password" id="pin-inp" placeholder="Ingresa la clave..." onkeydown="if(event.key==='Enter')doPin()"/>
+      <button class="btn btn-primary" onclick="doPin()">ACCEDER</button>
+      <div id="pin-err" style="font-size:12px;color:var(--red);margin-top:8px;display:none;">Clave incorrecta.</div>
+    </div>
+    <button class="btn btn-ghost" onclick="goWelcome()">← Volver</button>
+  </div>
+</div>
+
+<!-- ══════════ ADMIN ══════════ -->
+<div id="sadm" class="screen">
+  <div class="topbar" style="padding:16px;">
+    <div>
+      <div class="topbar-title">🏆 RANKING EN VIVO</div>
+      <div class="topbar-sub">YO SOY EL PROTAGONISTA</div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-ghost btn-sm" style="border-color:#ffffff50;color:#fff;padding:8px 12px;" onclick="loadRanking()">↻</button>
+      <button class="btn btn-ghost btn-sm" style="border-color:#ffffff50;color:#fff;padding:8px 12px;" onclick="goWelcome()">✕</button>
+    </div>
+  </div>
+  <div class="content" style="padding-top:14px;">
+    <div class="stats-grid" id="adm-stats"></div>
+    <div class="card" style="padding:14px 16px;"><div id="adm-list"></div></div>
+    <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="btn btn-ghost btn-sm" onclick="loadRanking()">↻ Refrescar</button>
+      <button class="btn btn-ghost btn-sm" style="border-color:#fca5a5;color:var(--red);" onclick="clearLocal()">🗑 Limpiar local</button>
+    </div>
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;font-size:12px;color:#1d4ed8;line-height:1.7;margin-top:12px;">
+      <strong>📊 Resultados en tiempo real:</strong><br>
+      Cada respuesta enviada aparece automáticamente en tu Google Sheet. Pulsa ↻ para refrescar el ranking.
+    </div>
+  </div>
+</div>
+
+</div><!-- #root -->
+
+<script>
+// ════════════════════════════════════════
+//  ⚙️  CONFIGURACIÓN — edita estas líneas
+// ════════════════════════════════════════
+// PASO 1: Pega aquí la URL de tu Google Apps Script
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbw-FSOCOZq1D2NDdrOMkz0dMhcZHUMpNxFwV3NQlvA-y52KpIIKJv4q-Loj67OmZELX/exec";
+
+// PASO 2: Cambia la clave si quieres
+const ADMIN_PIN = "sst2025";
+
+// Configuración del juego
+const MAX_ATTEMPTS = 2;
+const TIME_SEC = 30;
+// ════════════════════════════════════════
+
+const ATT_KEY = "prot_att_v1";
+const BC = ['b0','b1','b2','b3','b4','b5','b6','b7','b8','b9'];
+
+const QS = [
+  // 1
+  {cat:"🚫 Intransable N°1",
+   title:"Trabajador con aliento alcohólico",
+   sit:"Un operario llega a turno con evidente aliento a alcohol. Dice que fue solo una cerveza y que ya se le pasó. El capataz quiere que entre porque están cortos de personal.",
+   opts:[
+     {t:"Permitir el ingreso porque ya pasaron varias horas.",c:false},
+     {t:"Pedirle agua y esperar 30 minutos.",c:false},
+     {t:"Impedir el ingreso. El Intransable N°1 prohíbe trabajar bajo efectos del alcohol, sin excepción.",c:true},
+     {t:"Dejarlo en tareas administrativas.",c:false}
+   ],
+   exp:"Intransable N°1: NUNCA trabajes bajo efectos del alcohol o drogas. Sin excepciones. La Política de Negatividad te respalda para detener cualquier tarea insegura."},
+  // 2
+  {cat:"🚫 Intransable N°2",
+   title:"Trabajador sin EPP en zona de riesgo",
+   sit:"Un operario ingresa al área de operaciones sin casco ni chaleco reflectivo porque 'solo va a recoger algo rápido y vuelve'. El acceso es una zona con tránsito de equipos móviles.",
+   opts:[
+     {t:"Está bien si es solo un momento.",c:false},
+     {t:"Puede ingresar si un compañero lo acompaña.",c:false},
+     {t:"Detenerlo de inmediato. El Intransable N°2 prohíbe ingresar a zonas de riesgo sin los EPP que exige la actividad.",c:true},
+     {t:"Avisarle para la próxima vez.",c:false}
+   ],
+   exp:"Intransable N°2: NUNCA dejes de usar los EPP que exige la actividad. El tiempo que dure la exposición no justifica omitir la protección. Cada segundo sin EPP es un riesgo real."},
+  // 3
+  {cat:"🚫 Intransable N°4",
+   title:"Incidente no reportado",
+   sit:"Durante una maniobra, un operario golpea levemente su mano con una herramienta. No sangra ni duele mucho. Sus compañeros le dicen que no vale la pena reportarlo 'por tan poca cosa'.",
+   opts:[
+     {t:"No reportar si no hay herida visible.",c:false},
+     {t:"Esperar a ver si duele más y reportar solo si empeora.",c:false},
+     {t:"Reportar de inmediato. El Intransable N°4 exige reportar cualquier incidente, por menor que parezca.",c:true},
+     {t:"Anotarlo en el cuaderno personal por si acaso.",c:false}
+   ],
+   exp:"Intransable N°4: NUNCA dejes de reportar de forma inmediata cualquier incidente, sin importar su gravedad aparente. Los incidentes menores son señales de peligros mayores. Reportar protege a todos."},
+  // 4
+  {cat:"🚫 Intransable N°7",
+   title:"¿Empezamos sin análisis de riesgo?",
+   sit:"El supervisor da la orden de iniciar una tarea de carga con montacargas. El operador quiere saltarse el análisis de riesgo porque ya hizo esa tarea muchas veces y 'la conoce de memoria'.",
+   opts:[
+     {t:"Si tiene experiencia, puede omitir el análisis.",c:false},
+     {t:"Solo omitirlo si la tarea dura menos de 15 minutos.",c:false},
+     {t:"No puede omitirlo. El Intransable N°7 exige realizar siempre el análisis de riesgo y respetar los procedimientos asociados.",c:true},
+     {t:"Puede empezar y hacer el análisis en paralelo.",c:false}
+   ],
+   exp:"Intransable N°7: SIEMPRE realiza el análisis de riesgo de la actividad y respeta rigurosamente los procedimientos asociados. La experiencia no reemplaza el análisis. Cada tarea puede tener condiciones distintas."},
+  // 5
+  {cat:"📋 Jerarquía de Prioridades",
+   title:"Presión del cliente vs. frenos fallados",
+   sit:"El cliente exige que el camión salga de inmediato para no perder el contrato. El conductor detectó que los frenos no responden bien. El supervisor dice: 'Los resultados del negocio están en juego.'",
+   opts:[
+     {t:"Dar la salida porque el cliente tiene prioridad.",c:false},
+     {t:"Que el conductor maneje despacio.",c:false},
+     {t:"Retener el vehículo. La Jerarquía Ambipar pone la SEGURIDAD primero, por encima de los resultados del negocio.",c:true},
+     {t:"Consultar al área comercial primero.",c:false}
+   ],
+   exp:"Jerarquía Ambipar: 1° Seguridad, 2° Cumplimiento de leyes, 3° Calidad de servicio, 4° Resultados del negocio. Ninguna presión comercial justifica enviar un vehículo con fallas mecánicas."},
+  // 6
+  {cat:"📋 Jerarquía de Prioridades",
+   title:"¿Qué va primero: calidad o ley?",
+   sit:"Una empresa subcontratista te pide firmar un acta de entrega indicando que el servicio fue ejecutado conforme a las especificaciones del cliente, aunque se detectó una no conformidad legal en la disposición de residuos.",
+   opts:[
+     {t:"Firmar para no perder la relación comercial.",c:false},
+     {t:"Firmar y reportar la no conformidad después.",c:false},
+     {t:"No firmar. El Cumplimiento de leyes (prioridad 2) va antes que la Calidad de servicio (prioridad 3). Una no conformidad legal no puede omitirse.",c:true},
+     {t:"Dejar que el cliente decida.",c:false}
+   ],
+   exp:"La Jerarquía de Prioridades es clara: el Cumplimiento legal está por encima de la Calidad de servicio y los resultados del negocio. Firmar un acta falsa expone a Ambipar a sanciones legales graves."},
+  // 7
+  {cat:"⚠️ Riesgos Críticos",
+   title:"¿Cuántos Riesgos Críticos tiene Ambipar?",
+   sit:"Un trabajador nuevo en inducción pregunta cuántos Riesgos Críticos (RC) ha identificado Ambipar y cuáles son.",
+   opts:[
+     {t:"7 RC: altura, espacio confinado, energía peligrosa, caliente, MATPEL, equipos móviles y estacionarios.",c:false},
+     {t:"9 RC: equipos móviles, estacionarios, izaje, energía peligrosa, altura, espacio confinado, caliente, MATPEL y trabajo en cuerpos de agua.",c:true},
+     {t:"5 RC: los más comunes.",c:false},
+     {t:"10 RC, incluyendo trabajo nocturno.",c:false}
+   ],
+   exp:"Ambipar tiene 9 Riesgos Críticos (RC1–RC9): Equipos Móviles, Estacionarios, Izaje/Carga Suspendida, Energía Peligrosa, Altura, Espacio Confinado, Trabajo en Caliente, MATPEL, y Trabajo en/sobre Cuerpos de Agua."},
+  // 8
+  {cat:"⚠️ Riesgo Crítico RC6",
+   title:"Trabajo en espacio confinado",
+   sit:"Un técnico debe ingresar a una cisterna vacía para revisión interna. El supervisor dice que como 'ya está vacía y ventilada', no necesita permiso de trabajo ni medición de atmósfera.",
+   opts:[
+     {t:"Si está ventilada, puede entrar directamente.",c:false},
+     {t:"Puede entrar si lleva su EPP completo.",c:false},
+     {t:"No puede ingresar sin medición de atmósfera y permiso de trabajo. El RC6 (espacio confinado) exige controles críticos antes de cualquier ingreso.",c:true},
+     {t:"Puede entrar si un compañero lo vigila desde afuera.",c:false}
+   ],
+   exp:"El RC6 (Espacio Confinado) exige medición de atmósfera, permiso de trabajo y vigía capacitado ANTES de ingresar, independientemente de si el espacio parece seguro. La atmósfera puede ser peligrosa aunque no se vea ni huela nada."},
+  // 9
+  {cat:"🚛 RC1 · Equipos Móviles",
+   title:"Control crítico antes de operar",
+   sit:"Un conductor va a operar una cisterna de Ambipar por primera vez en esa unidad. ¿Cuál es el primer control crítico antes de mover el vehículo?",
+   opts:[
+     {t:"Llenar el check list y arrancar.",c:false},
+     {t:"Verificar que tenga licencia vigente Y la autorización interna de Ambipar para ese equipo.",c:true},
+     {t:"Revisar combustible y neumáticos.",c:false},
+     {t:"Autorización verbal del supervisor.",c:false}
+   ],
+   exp:"Control Crítico 01 de RC1: verificar licencia de conducir vigente Y autorización interna de Ambipar antes de operar cualquier equipo móvil. Sin ambos documentos, el vehículo no puede moverse."},
+  // 10
+  {cat:"🚛 RC1 · Equipos Móviles",
+   title:"Evaluación psicosomátrica periódica",
+   sit:"Un conductor lleva 3 años en Ambipar sin accidentes. Su supervisor cree que ya no necesita evaluaciones psicosomátricas. ¿Tiene razón?",
+   opts:[
+     {t:"Sí, 3 años sin accidentes lo exime.",c:false},
+     {t:"Solo si cambia de tipo de vehículo.",c:false},
+     {t:"No. El Control Crítico 02 de RC1 exige evaluaciones psicosomátricas periódicas para todos, sin importar antigüedad ni historial.",c:true},
+     {t:"Solo para mayores de 50 años.",c:false}
+   ],
+   exp:"Control Crítico 02 de RC1: evaluaciones psicosomátricas periódicas son obligatorias para todos los conductores y operadores. La antigüedad y el récord limpio no eximen este control. Se evalúa aptitud física y mental continua."}
+];
+
+// ── State ──
+let cur=0, score=0, player="", answered=false, timerInt=null, tLeft=TIME_SEC;
+
+const g = id => document.getElementById(id);
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  g(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function getAtts(){try{return JSON.parse(localStorage.getItem(ATT_KEY)||"{}");}catch(e){return{};}}
+function saveAtts(o){try{localStorage.setItem(ATT_KEY,JSON.stringify(o));}catch(e){}}
+function goWelcome(){stopTimer();g('inp-name').value='';show('sw');}
+function goPin(){g('pin-inp').value='';g('pin-err').style.display='none';show('spin');}
+
+// ── Start ──
+function doStart(){
+  const name = g('inp-name').value.trim();
+  if(!name){g('err-name').style.display='block';return;}
+  g('err-name').style.display='none';
+  const atts=getAtts(), key=name.toLowerCase(), used=atts[key]||0;
+  if(used>=MAX_ATTEMPTS){
+    g('bl-msg').innerHTML=`<strong style="color:var(--red);font-size:16px;">${name}</strong><br><br>Ya usaste tus <strong>${MAX_ATTEMPTS} intentos</strong>.<br>Ya no puedes participar en esta ronda.`;
+    show('sbl'); return;
+  }
+  player=name; atts[key]=used+1; saveAtts(atts);
+  cur=0; score=0; answered=false;
+  updateDots(atts[key]);
+  loadQ(); show('sg');
+}
+
+function updateDots(used){
+  for(let i=1;i<=MAX_ATTEMPTS;i++){
+    const d=g('d'+i);
+    if(d) d.className='dot '+(i<=used?'dead':'live');
+  }
+}
+
+// ── Timer ──
+function startTimer(){
+  stopTimer(); tLeft=TIME_SEC; updateTimerUI();
+  timerInt = setInterval(()=>{
+    tLeft--;
+    updateTimerUI();
+    if(tLeft<=0){stopTimer();onTimeout();}
+  },1000);
+}
+function stopTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;}}
+function updateTimerUI(){
+  const pct=(tLeft/TIME_SEC)*100;
+  const bar=g('t-bar'), num=g('t-num');
+  bar.style.width=pct+'%';
+  const col = tLeft>15?'var(--blue)':tLeft>7?'var(--amber)':'var(--red)';
+  bar.style.background=col; num.style.color=col;
+  num.textContent=tLeft;
+}
+function onTimeout(){
+  if(answered)return;
+  answered=true;
+  const q=QS[cur];
+  document.querySelectorAll('.opt').forEach((b,i)=>{
+    b.className = q.opts[i].c ? 'opt ok' : 'opt dim';
+  });
+  const fb=g('q-fb');
+  fb.className='fb fb-time';
+  fb.innerHTML='<strong>⏰ Tiempo agotado.</strong> '+q.exp;
+  fb.style.display='block';
+  g('next-btn').style.display='block';
+  g('next-btn').textContent=cur<QS.length-1?'SIGUIENTE →':'VER RESULTADO ✓';
+}
+
+// ── Load Q ──
+function loadQ(){
+  const q=QS[cur];
+  g('q-counter').textContent='CASO '+(cur+1)+' / '+QS.length;
+  g('prog-label').textContent='CASO '+(cur+1)+' DE '+QS.length;
+  g('prog-fill').style.width=(cur/QS.length*100)+'%';
+  g('score-label').textContent='PUNTAJE: '+score+'/'+QS.length;
+  g('q-cat').textContent=q.cat;
+  g('q-cat').className='badge '+BC[cur%BC.length];
+  g('q-title').textContent=q.title;
+  g('q-sit').textContent=q.sit;
+
+  const oc=g('opts'); oc.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='opt';
+    btn.innerHTML=`<span class="opt-letter">${String.fromCharCode(65+i)}</span><span class="opt-text">${o.t}</span>`;
+    btn.onclick=()=>pick(i);
+    oc.appendChild(btn);
+  });
+  g('q-fb').style.display='none';
+  g('next-btn').style.display='none';
+  answered=false;
+  startTimer();
+}
+
+// ── Pick ──
+function pick(idx){
+  if(answered)return;
+  answered=true; stopTimer();
+  const q=QS[cur], ok=q.opts[idx].c;
+  document.querySelectorAll('.opt').forEach((b,i)=>{
+    if(q.opts[i].c) b.className='opt ok';
+    else if(i===idx) b.className='opt no';
+    else b.className='opt dim';
+  });
+  if(ok){
+    score++;
+    g('score-label').textContent='PUNTAJE: '+score+'/'+QS.length;
+    g('q-card').classList.add('bounce');
+    setTimeout(()=>g('q-card').classList.remove('bounce'),350);
+  } else {
+    g('q-card').classList.add('shake');
+    setTimeout(()=>g('q-card').classList.remove('shake'),350);
+  }
+  const fb=g('q-fb');
+  fb.className='fb '+(ok?'fb-ok':'fb-no');
+  fb.innerHTML='<strong>'+(ok?'✓ Correcto. ':'✗ Incorrecto. ')+'</strong>'+q.exp;
+  fb.style.display='block';
+  g('next-btn').style.display='block';
+  g('next-btn').textContent=cur<QS.length-1?'SIGUIENTE →':'VER RESULTADO ✓';
+}
+
+function doNext(){cur++;cur>=QS.length?finish():loadQ();}
+
+// ── Finish ──
+async function finish(){
+  stopTimer();
+  const atts=getAtts(), used=atts[player.toLowerCase()]||1;
+  const M=[
+    {c:'var(--red)',m:'Debes repasar los estándares Ambipar.'},
+    {c:'var(--red)',m:'Sigue practicando. Repasa los Intransables.'},
+    {c:'var(--red)',m:'Necesitas mejorar. Estudia los Riesgos Críticos.'},
+    {c:'var(--amber)',m:'Vas bien. Refuerza los temas que fallaste.'},
+    {c:'var(--amber)',m:'Buen desempeño. Casi llega al nivel esperado.'},
+    {c:'var(--amber)',m:'Buen manejo de los estándares Ambipar.'},
+    {c:'var(--blue)',m:'Muy bien. Dominas la mayor parte.'},
+    {c:'var(--blue)',m:'Excelente. Demuestra que eres el protagonista.'},
+    {c:'var(--green)',m:'Sobresaliente. ¡Vivimos la Seguridad!'},
+    {c:'var(--green)',m:'¡Casi perfecto! Gran dominio de los estándares.'},
+    {c:'var(--green)',m:'¡PERFECTO! Eres el verdadero protagonista. 🏆'}
+  ];
+  const d=M[score]||M[10];
+  g('fin-score').innerHTML=score+'<span>/10</span>';
+  g('fin-name').textContent=player;
+  g('fin-msg').innerHTML=`<span style="color:${d.c};">${d.m}</span>`;
+  show('sf');
+
+  // Enviar a Google Sheets
+  const st=g('fin-status');
+  st.textContent='⏳ Guardando resultado...';
+  const now=new Date();
+  const fecha=now.toLocaleDateString('es-PE');
+  const hora=now.toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'});
+
+  if(SHEET_URL==="NEVER_MATCH_THIS"){
+    st.textContent='⚠️ Configura el SHEET_URL para guardar resultados.';
+    return;
+  }
+  try{
+    const p=new URLSearchParams({nombre:player,puntaje:score,total:QS.length,intento:used,fecha,hora});
+    await fetch(SHEET_URL+'?'+p.toString(),{method:'GET',mode:'no-cors'});
+    st.innerHTML='✅ Resultado guardado correctamente.';
+  }catch(e){
+    st.innerHTML='⚠️ No se pudo guardar. Sin conexión.';
+  }
+}
+
+// ── Admin ──
+function doPin(){
+  if(g('pin-inp').value===ADMIN_PIN){loadRanking();show('sadm');}
+  else g('pin-err').style.display='block';
+}
+
+async function loadRanking(){
+  g('adm-list').innerHTML='<div style="font-size:13px;color:var(--text3);padding:8px 0;">⏳ Cargando resultados...</div>';
+  renderStats([]);
+  if(SHEET_URL==="NEVER_MATCH_THIS"){
+    g('adm-list').innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0;">⚠️ Configura el SHEET_URL para ver resultados.</div>';
+    return;
+  }
+  try{
+    const res=await fetch(SHEET_URL+'?action=get');
+    const data=await res.json();
+    renderRanking(data);
+  }catch(e){
+    g('adm-list').innerHTML='<div style="font-size:13px;color:var(--red);padding:8px 0;">⚠️ Error al cargar. Verifica el SHEET_URL y que el script esté publicado.</div>';
+  }
+}
+
+function renderRanking(data){
+  if(!data||!data.length){
+    g('adm-list').innerHTML='<div style="font-size:13px;color:var(--text3);padding:8px 0;">Sin participantes aún.</div>';
+    renderStats([]); return;
+  }
+  const sorted=[...data].sort((a,b)=>Number(b.puntaje)-Number(a.puntaje));
+  const medals=['rk1','rk2','rk3'],icons=['🥇','🥈','🥉'];
+  g('adm-list').innerHTML=sorted.map((r,i)=>`
+    <div class="rank-row">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span class="rank-pos ${medals[i]||'rkn'}">${i<3?icons[i]:(i+1)+'.'}</span>
+        <div>
+          <div class="rank-name">${r.nombre||''}</div>
+          <div class="rank-meta">Intento ${r.intento||'?'} · ${r.fecha||''} ${r.hora||''}</div>
+        </div>
+      </div>
+      <div class="rank-score" style="color:${Number(r.puntaje)>=7?'var(--green)':Number(r.puntaje)>=4?'var(--amber)':'var(--red)'}">
+        ${r.puntaje}/${r.total||10}
+      </div>
+    </div>`).join('');
+  renderStats(data);
+}
+
+function renderStats(data){
+  const tot=data.length;
+  const sc=data.map(r=>Number(r.puntaje||0));
+  const avg=tot>0?(sc.reduce((a,b)=>a+b,0)/tot).toFixed(1):'-';
+  const best=tot>0?Math.max(...sc):'-';
+  g('adm-stats').innerHTML=[['Jugadores',tot],['Promedio',avg+'/10'],['Mejor',best+'/10']]
+    .map(([l,v])=>`<div class="stat-box"><div class="stat-val">${v}</div><div class="stat-lbl">${l}</div></div>`).join('');
+}
+
+function clearLocal(){
+  if(confirm('¿Limpiar intentos locales en este dispositivo?\n(Los datos de Google Sheets no se borran)')){
+    localStorage.removeItem(ATT_KEY);
+    alert('✅ Intentos locales eliminados.');
+  }
+}
+</script>
+
+<!-- ════════════════════════════════════════
+     INSTRUCCIONES GOOGLE SHEETS
+     ════════════════════════════════════════ -->
+<div style="margin:20px 16px 0;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px;font-family:'Barlow',sans-serif;font-size:13px;color:#475569;line-height:1.8;">
+  <div style="font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;letter-spacing:2px;color:#1a6fff;margin-bottom:16px;">📋 CONECTAR A GOOGLE SHEETS</div>
+
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin:14px 0 6px;">Paso 1 — Crear la planilla</div>
+  <div>Abre <strong>Google Sheets</strong>. En la fila 1 escribe exactamente estas 6 cabeceras:<br>
+  <code style="background:#f0f4ff;padding:3px 8px;border-radius:5px;color:#1d4ed8;font-size:12px;">nombre &nbsp; puntaje &nbsp; total &nbsp; intento &nbsp; fecha &nbsp; hora</code></div>
+
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin:14px 0 6px;">Paso 2 — Apps Script</div>
+  <div>Ve a <strong>Extensiones → Apps Script</strong>. Borra todo y pega este código:</div>
+<pre style="background:#f0f4ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px;font-size:11px;color:#1d4ed8;overflow-x:auto;margin:8px 0;white-space:pre-wrap;line-height:1.7;">function doGet(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+
+  if (e.parameter.action === 'get') {
+    var data = sheet.getDataRange().getValues();
+    var headers = data[0];
+    var rows = data.slice(1).map(function(row) {
+      var obj = {};
+      headers.forEach(function(h, i) { obj[h] = row[i]; });
+      return obj;
+    });
+    var output = ContentService.createTextOutput(JSON.stringify(rows));
+    output.setMimeType(ContentService.MimeType.JSON);
+    return output;
+  }
+
+  sheet.appendRow([
+    e.parameter.nombre  || '',
+    e.parameter.puntaje || 0,
+    e.parameter.total   || 10,
+    e.parameter.intento || 1,
+    e.parameter.fecha   || '',
+    e.parameter.hora    || ''
+  ]);
+
+  var output = ContentService.createTextOutput(JSON.stringify({ok: true}));
+  output.setMimeType(ContentService.MimeType.JSON);
+  return output;
+}</pre>
+
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin:14px 0 6px;">Paso 3 — Publicar (MUY IMPORTANTE)</div>
+  <div>
+    1. Clic en <strong>Implementar → Nueva implementación</strong><br>
+    2. Engranaje ⚙️ → <strong>Aplicación web</strong><br>
+    3. Ejecutar como: <strong>Yo (tu correo)</strong><br>
+    4. Quién tiene acceso: <strong>Cualquier persona</strong> ← muy importante<br>
+    5. Clic en <strong>Implementar</strong><br>
+    6. Autoriza los permisos cuando te los pida<br>
+    7. <strong>Copia la URL</strong> que aparece (empieza con https://script.google.com...)
+  </div>
+
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#94a3b8;margin:14px 0 6px;">Paso 4 — Pegar URL en el archivo</div>
+  <div>
+    Abre este archivo con Bloc de notas o VS Code.<br>
+    Busca esta línea:<br>
+    <code style="background:#f0f4ff;padding:3px 8px;border-radius:5px;color:#dc2626;font-size:12px;">const SHEET_URL = "https://script.google.com/macros/s/AKfycbw-FSOCOZq1D2NDdrOMkz0dMhcZHUMpNxFwV3NQlvA-y52KpIIKJv4q-Loj67OmZELX/exec";</code><br>
+    Reemplaza <strong>https://script.google.com/macros/s/AKfycbw-FSOCOZq1D2NDdrOMkz0dMhcZHUMpNxFwV3NQlvA-y52KpIIKJv4q-Loj67OmZELX/exec</strong> con tu URL real. Guarda y listo. 🚀
+  </div>
+
+  <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-top:14px;font-size:12px;color:#1d4ed8;">
+    💡 <strong>Tip:</strong> Si el script falla después de publicar, ve a <strong>Implementar → Administrar implementaciones</strong> y crea una <strong>nueva versión</strong>. Cada vez que edites el código debes crear nueva versión.
+  </div>
+</div>
+
+</body>
+</html>
