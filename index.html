@@ -698,24 +698,25 @@ function doPin(){
 async function loadRanking(){
   g('adm-list').innerHTML='<div style="font-size:13px;color:var(--text3);padding:8px 0;">⏳ Cargando resultados...</div>';
   renderStats([]);
-  const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRpui6ioXtuMTjheUSKA0YP5JtTICjr4befQnaPgYobviX3g0GdnNv1IptLBhbnqLypy1gDE5hKrIJO/pub?gid=0&single=true&output=csv";
+  const CSV="https://docs.google.com/spreadsheets/d/e/2PACX-1vRpui6ioXtuMTjheUSKA0YP5JtTICjr4befQnaPgYobviX3g0GdnNv1IptLBhbnqLypy1gDE5hKrIJO/pub?gid=0&single=true&output=csv&t="+Date.now();
   try{
-    const res = await fetch(CSV_URL + '&t=' + Date.now());
-    const text = await res.text();
-    const lines = text.trim().split('\n');
-    if(lines.length < 2){ renderRanking([]); return; }
-    const headers = lines[0].split(',').map(h=>h.trim().replace(/"/g,''));
-    const data = lines.slice(1).map(line => {
-      const vals = line.split(',').map(v=>v.trim().replace(/"/g,''));
-      const obj = {};
-      headers.forEach((h,i) => obj[h] = vals[i]||'');
+    const res=await fetch(CSV);
+    const txt=await res.text();
+    const lines=txt.trim().split('\n').filter(l=>l.trim());
+    if(lines.length<2){renderRanking([]);return;}
+    const heads=lines[0].split(',').map(h=>h.trim().replace(/"/g,''));
+    const data=lines.slice(1).map(line=>{
+      const vals=line.split(',').map(v=>v.trim().replace(/"/g,''));
+      const obj={};
+      heads.forEach((h,i)=>obj[h]=vals[i]||'');
       return obj;
-    }).filter(r => r.nombre && r.nombre !== '');
+    }).filter(r=>r.nombre&&r.nombre.trim()!='');
     renderRanking(data);
-  }catch(e){
-    g('adm-list').innerHTML='<div style="font-size:13px;color:var(--red);padding:8px 0;">⚠️ Error al cargar. Verifica tu conexión a internet.</div>';
+  }catch(err){
+    g('adm-list').innerHTML='<div style="font-size:13px;color:var(--red);padding:8px 0;">⚠️ Error: '+err.message+'</div>';
   }
 }
+
 
 function renderRanking(data){
   if(!data||!data.length){
