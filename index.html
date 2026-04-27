@@ -700,7 +700,7 @@ async function loadRanking(){
   g('adm-list').innerHTML='<div style="font-size:13px;color:var(--text3);padding:8px 0;">⏳ Cargando...</div>';
   renderStats([]);
   try{
-    const res=await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRpui6ioXtuMTjheUSKA0YP5JtTICjr4befQnaPgYobviX3g0GdnNv1IptLBhbnqLypy1gDE5hKrIJO/pub?gid=0&single=true&output=csv&t="+Date.now());
+    const res=await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4Te8saOx-YedC176vjZ8f5q_B2OWi7R9aK3oeHpdtrusxfflsJnLNmDpI25dMnQDHdpCJUAtJsjEy/pub?gid=1047458106&single=true&output=csv&t="+Date.now());
     const txt=await res.text();
     const lines=txt.trim().split("\n").filter(function(l){return l.trim();});
     if(lines.length<2){renderRanking([]);return;}
@@ -709,6 +709,13 @@ async function loadRanking(){
       const vals=line.split(",").map(function(v){return v.trim().replace(/"/g,"");});
       const obj={};
       heads.forEach(function(h,i){obj[h]=vals[i]||"";});
+      // Normalize column names from Forms
+      if(obj["NOMBRE"]) obj.nombre=obj["NOMBRE"];
+      if(obj["PUNTAJE"]) obj.puntaje=obj["PUNTAJE"];
+      if(obj["TOTAL"]) obj.total=obj["TOTAL"];
+      if(obj["INTENTO"]) obj.intento=obj["INTENTO"];
+      if(obj["FECHA"]) obj.fecha=obj["FECHA"];
+      if(obj["HORA"]) obj.hora=obj["HORA"];
       return obj;
     }).filter(function(r){return r.nombre&&r.nombre.trim()!="";});
     renderRanking(data);
