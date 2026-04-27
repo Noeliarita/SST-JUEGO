@@ -395,7 +395,7 @@ hr{border:none;border-top:1px solid #f1f5f9;margin:12px 0;}
 //  ⚙️  CONFIGURACIÓN — edita estas líneas
 // ════════════════════════════════════════
 // PASO 1: Pega aquí la URL de tu Google Apps Script
-const SHEET_URL = "https://script.google.com/macros/s/AKfycby1j_fkmgtHB_XyO3alNlVzXAsKBh3zUmiw4hKiK3rK6DOBRKiuejgRu4XqafJTf1I6/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbw-FSOCOZq1D2NDdrOMkz0dMhcZHUMpNxFwV3NQlvA-y52KpIIKJv4q-Loj67OmZELX/exec";
 
 // PASO 2: Cambia la clave si quieres
 const ADMIN_PIN = "sst2025";
@@ -669,23 +669,24 @@ async function finish(){
   g('fin-msg').innerHTML=`<span style="color:${d.c};">${d.m}</span>`;
   show('sf');
 
-  // Enviar a Google Sheets
+  // Enviar a Google Forms
   const st=g('fin-status');
   st.textContent='⏳ Guardando resultado...';
   const now=new Date();
   const fecha=now.toLocaleDateString('es-PE');
   const hora=now.toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'});
-
-  if(false){
-    st.textContent='⚠️ Configura el SHEET_URL para guardar resultados.';
-    return;
-  }
   try{
-    const p=new URLSearchParams({nombre:player,puntaje:score,total:QS.length,intento:used,fecha,hora});
-    await fetch(SHEET_URL+'?'+p.toString(),{method:'GET',mode:'no-cors'});
+    const fd=new FormData();
+    fd.append("entry.1534799909",player);
+    fd.append("entry.343900628",score);
+    fd.append("entry.181480035",QS.length);
+    fd.append("entry.271899500",used);
+    fd.append("entry.2126061610",fecha);
+    fd.append("entry.92886506",hora);
+    await fetch("https://docs.google.com/forms/d/e/1FAIpQLSccGupinEvOdG6olCP7e51FbU1e-8AtmKxmg9mn8IaP3LqNlA/formResponse",{method:'POST',body:fd,mode:'no-cors'});
     st.innerHTML='✅ Resultado guardado correctamente.';
   }catch(e){
-    st.innerHTML='⚠️ No se pudo guardar. Sin conexión.';
+    st.innerHTML='⚠️ No se pudo guardar.';
   }
 }
 
